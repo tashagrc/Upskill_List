@@ -30,7 +30,7 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		A380269D2DE0AE52009901D4 /* Exceptions for "Upskill_List" folder in "Upskill_List" target */ = {
+		A38026FC2DE1BD25009901D4 /* Exceptions for "Upskill_List" folder in "Upskill_List" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
@@ -40,14 +40,6 @@
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		A38026772DE0AE51009901D4 /* Upskill_List */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				A380269D2DE0AE52009901D4 /* Exceptions for "Upskill_List" folder in "Upskill_List" target */,
-			);
-			path = Upskill_List;
-			sourceTree = "<group>";
-		};
 		A380268E2DE0AE52009901D4 /* Upskill_ListTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = Upskill_ListTests;
@@ -56,6 +48,14 @@
 		A38026982DE0AE52009901D4 /* Upskill_ListUITests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = Upskill_ListUITests;
+			sourceTree = "<group>";
+		};
+		A38026F42DE1BD25009901D4 /* Upskill_List */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				A38026FC2DE1BD25009901D4 /* Exceptions for "Upskill_List" folder in "Upskill_List" target */,
+			);
+			path = Upskill_List;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -88,7 +88,7 @@
 		A380266C2DE0AE51009901D4 = {
 			isa = PBXGroup;
 			children = (
-				A38026772DE0AE51009901D4 /* Upskill_List */,
+				A38026F42DE1BD25009901D4 /* Upskill_List */,
 				A380268E2DE0AE52009901D4 /* Upskill_ListTests */,
 				A38026982DE0AE52009901D4 /* Upskill_ListUITests */,
 				A38026762DE0AE51009901D4 /* Products */,
@@ -121,7 +121,7 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				A38026772DE0AE51009901D4 /* Upskill_List */,
+				A38026F42DE1BD25009901D4 /* Upskill_List */,
 			);
 			name = Upskill_List;
 			packageProductDependencies = (
@@ -293,8 +293,8 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Upskill_List/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
+				INFOPLIST_KEY_UIMainStoryboardFile = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -321,8 +321,8 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Upskill_List/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
+				INFOPLIST_KEY_UIMainStoryboardFile = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
