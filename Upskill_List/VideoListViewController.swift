@@ -43,7 +43,11 @@ class VideoListViewController: UIViewController {
 }
 
 extension VideoListViewController: UITableViewDelegate {
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectedItem = videos[indexPath.row]
+        let detailVC = VideoDetailViewController(video: selectedItem)
+        navigationController?.pushViewController(detailVC, animated: false)
+    }
 }
 
 extension VideoListViewController: UITableViewDataSource {
@@ -66,7 +70,7 @@ extension VideoListViewController {
     func fetchData() -> [Video] {
         var videos: [Video] = []
         for i in 1...15 {
-            videos.append(Video(image: UIImage(named: "\(i)"), title: "This is video \(i)"))
+            videos.append(Video(image: UIImage(named: "\(i)"), title: "This is video \(i)", subtitle: "This is subtitle for video \(i)"))
         }
         return videos
     }

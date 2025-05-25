@@ -11,15 +11,19 @@ class VideoCell: UITableViewCell {
     // buat custom cell
     var videoImageView = UIImageView()
     var videoTitleLabel = UILabel()
+    var videoSubtitleLabel = UILabel()
     // do setup ui here
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         addSubview(videoImageView)
         addSubview(videoTitleLabel)
+        addSubview(videoSubtitleLabel)
         configureImageView()
         configureTitleLabel()
+        configureSubtitleLabel()
         setImageConstraints()
         setTitleLabelConstraints()
+        setSubtitleLabelConstraints()
     }
     
     // dont use this init
@@ -30,6 +34,7 @@ class VideoCell: UITableViewCell {
     func set(video: Video) {
         videoImageView.image = video.image
         videoTitleLabel.text = video.title
+        videoSubtitleLabel.text = video.subtitle
     }
     
     func configureImageView() {
@@ -39,6 +44,11 @@ class VideoCell: UITableViewCell {
     
     func configureTitleLabel() {
         videoTitleLabel.numberOfLines = 0
+        videoTitleLabel.adjustsFontSizeToFitWidth = true
+    }
+    
+    func configureSubtitleLabel() {
+        videoSubtitleLabel.numberOfLines = 0
         videoTitleLabel.adjustsFontSizeToFitWidth = true
     }
     
@@ -52,10 +62,18 @@ class VideoCell: UITableViewCell {
     
     func setTitleLabelConstraints() {
         videoTitleLabel.translatesAutoresizingMaskIntoConstraints = false
-        videoTitleLabel.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+        videoTitleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 12).isActive = true
         videoTitleLabel.leadingAnchor.constraint(equalTo: videoImageView.trailingAnchor, constant: 20).isActive = true
-        videoTitleLabel.heightAnchor.constraint(equalToConstant: 80).isActive = true
+        videoTitleLabel.heightAnchor.constraint(equalToConstant: 40).isActive = true
         // has to be negative
         videoTitleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -12).isActive = true
+    }
+    
+    func setSubtitleLabelConstraints() {
+        videoSubtitleLabel.translatesAutoresizingMaskIntoConstraints = false
+        videoSubtitleLabel.topAnchor.constraint(equalTo: videoTitleLabel.bottomAnchor).isActive = true
+        videoSubtitleLabel.leadingAnchor.constraint(equalTo: videoImageView.trailingAnchor, constant: 20).isActive = true
+        videoSubtitleLabel.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        videoSubtitleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -12).isActive = true
     }
 }
