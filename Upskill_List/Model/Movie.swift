@@ -8,6 +8,11 @@
 import Foundation
 import UIKit
 
+struct MovieList: Decodable {
+    var page: Int
+    var results: [Movie]
+}
+
 struct Movie: Decodable {
     var adult: Bool
     var backdropPath: String

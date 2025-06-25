@@ -9,7 +9,11 @@ import UIKit
 
 class MovieListViewController: UIViewController {
     var tableView = UITableView()
-    var movies: [Movie] = []
+    var movies: [Movie] = [] {
+        didSet {
+            tableView.reloadData()
+        }
+    }
     
     struct Cells {
         static let movieCell = "MoviesCell"
@@ -18,40 +22,11 @@ class MovieListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Movies"
-        movies = fetchData()
         configureTableView()
-        
         Task {
-            await test()
+            movies = await fetchData()
         }
-    }
-    
-    func test() async {
-        let url = URL(string: "https://api.themoviedb.org/3/discover/movie")!
-        var components = URLComponents(url: url, resolvingAgainstBaseURL: true)!
-        let queryItems: [URLQueryItem] = [
-          URLQueryItem(name: "include_adult", value: "false"),
-          URLQueryItem(name: "include_video", value: "false"),
-          URLQueryItem(name: "language", value: "en-US"),
-          URLQueryItem(name: "page", value: "1"),
-          URLQueryItem(name: "sort_by", value: "popularity.desc"),
-        ]
-        components.queryItems = components.queryItems.map { $0 + queryItems } ?? queryItems
-
-        var request = URLRequest(url: components.url!)
-        request.httpMethod = "GET"
-        request.timeoutInterval = 10
-        request.allHTTPHeaderFields = [
-          "accept": "application/json",
-          "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJmMjA1MzcyNjUzNzVhNmE3Yzg3N2NkMzQ4NGU2ZDA4NCIsIm5iZiI6MTc0ODE3MjM4OS4xNTUsInN1YiI6IjY4MzJmZTY1YzQzNTU4MDdkMzAzNmZkYSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.pNWLFrgxXQGqbix3e0AKxx4Xlxnj1ubeaNPhcBuB5EU"
-        ]
-
-        do {
-            let (data, _) = try await URLSession.shared.data(for: request)
-            print(String(decoding: data, as: UTF8.self))
-        } catch {
-            print("❌ Request failed: \(error.localizedDescription)")
-        }
+        
     }
     
     func configureTableView() {
@@ -77,7 +52,7 @@ class MovieListViewController: UIViewController {
 extension MovieListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedItem = movies[indexPath.row]
-        let detailVC = MovieDetailViewController(video: selectedItem)
+        let detailVC = MovieDetailViewController(movie: selectedItem)
         navigationController?.pushViewController(detailVC, animated: false)
     }
 }
@@ -99,7 +74,39 @@ extension MovieListViewController: UITableViewDataSource {
 }
 
 extension MovieListViewController {
-    func fetchData() -> [Movie] {
+    func fetchData() async -> [Movie] {
+        let url = URL(string: "https://api.themoviedb.org/3/discover/movie")!
+        var components = URLComponents(url: url, resolvingAgainstBaseURL: true)!
+        let queryItems: [URLQueryItem] = [
+          URLQueryItem(name: "include_adult", value: "false"),
+          URLQueryItem(name: "include_video", value: "false"),
+          URLQueryItem(name: "language", value: "en-US"),
+          URLQueryItem(name: "page", value: "1"),
+          URLQueryItem(name: "sort_by", value: "popularity.desc"),
+        ]
+        components.queryItems = components.queryItems.map { $0 + queryItems } ?? queryItems
+
+        var request = URLRequest(url: components.url!)
+        request.httpMethod = "GET"
+        request.timeoutInterval = 10
+        request.allHTTPHeaderFields = [
+          "accept": "application/json",
+          "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJmMjA1MzcyNjUzNzVhNmE3Yzg3N2NkMzQ4NGU2ZDA4NCIsIm5iZiI6MTc0ODE3MjM4OS4xNTUsInN1YiI6IjY4MzJmZTY1YzQzNTU4MDdkMzAzNmZkYSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.pNWLFrgxXQGqbix3e0AKxx4Xlxnj1ubeaNPhcBuB5EU"
+        ]
+
+        do {
+            let (data, _) = try await URLSession.shared.data(for: request)
+            
+            do {
+                let movies = try JSONDecoder().decode(MovieList.self, from: data)
+                return movies.results
+            } catch let jsonError {
+                print("Failed to decode json", jsonError)
+            }
+            
+        } catch {
+            print("❌ Request failed: \(error.localizedDescription)")
+        }
         return []
     }
 }

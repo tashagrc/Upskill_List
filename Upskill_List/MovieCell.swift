@@ -33,7 +33,7 @@ class MovieCell: UITableViewCell {
     
     func set(movie: Movie) {
         // ToDo change it to image
-        movieImageView.image = movie.posterPath
+        movieImageView.image = UIImage(named: "1")
         movieTitleLabel.text = movie.title
         movieSubtitleLabel.text = movie.overview
     }

@@ -38,7 +38,7 @@ class MovieDetailViewController: UIViewController {
         movieImageView.contentMode = .scaleAspectFit
         movieImageView.clipsToBounds = true
         // ToDo load image correctly
-        movie.image = movie.posterPath
+        movieImageView.image = UIImage(systemName: "1")
         stackView.addArrangedSubview(movieImageView)
         movieImageView.heightAnchor.constraint(equalToConstant: 300).isActive = true
     }
