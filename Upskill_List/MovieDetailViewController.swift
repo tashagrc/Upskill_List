@@ -7,15 +7,15 @@
 
 import UIKit
 
-class VideoDetailViewController: UIViewController {
+class MovieDetailViewController: UIViewController {
     var stackView = UIStackView()
-    var video: Video
-    let videoImageView = UIImageView()
-    var videoTitleLabel = UILabel()
-    var videoSubtitleLabel = UILabel()
+    var movie: Movie
+    let movieImageView = UIImageView()
+    var movieTitleLabel = UILabel()
+    var movieSubtitleLabel = UILabel()
     
-    init(video: Video) {
-        self.video = video
+    init(movie: Movie) {
+        self.movie = movie
         // have to be after self.video
         super.init(nibName: nil, bundle: nil)
     }
@@ -35,25 +35,26 @@ class VideoDetailViewController: UIViewController {
     }
     
     func addVideoImageToStackView() {
-        videoImageView.contentMode = .scaleAspectFit
-        videoImageView.clipsToBounds = true
-        videoImageView.image = video.image
-        stackView.addArrangedSubview(videoImageView)
-        videoImageView.heightAnchor.constraint(equalToConstant: 300).isActive = true
+        movieImageView.contentMode = .scaleAspectFit
+        movieImageView.clipsToBounds = true
+        // ToDo load image correctly
+        movie.image = movie.posterPath
+        stackView.addArrangedSubview(movieImageView)
+        movieImageView.heightAnchor.constraint(equalToConstant: 300).isActive = true
     }
     
     func addVideoTitleLabelToStackView() {
-        videoTitleLabel.text = video.title
-        videoTitleLabel.numberOfLines = 0
-        videoTitleLabel.adjustsFontSizeToFitWidth = true
-        stackView.addArrangedSubview(videoTitleLabel)
+        movieTitleLabel.text = movie.title
+        movieTitleLabel.numberOfLines = 0
+        movieTitleLabel.adjustsFontSizeToFitWidth = true
+        stackView.addArrangedSubview(movieTitleLabel)
     }
     
     func addVideoSubtitleLabelToStackView() {
-        videoSubtitleLabel.text = video.subtitle
-        videoSubtitleLabel.numberOfLines = 0
-        videoSubtitleLabel.adjustsFontSizeToFitWidth = true
-        stackView.addArrangedSubview(videoSubtitleLabel)
+        movieSubtitleLabel.text = movie.overview
+        movieSubtitleLabel.numberOfLines = 0
+        movieSubtitleLabel.adjustsFontSizeToFitWidth = true
+        stackView.addArrangedSubview(movieSubtitleLabel)
     }
     
     func configureStackView() {
