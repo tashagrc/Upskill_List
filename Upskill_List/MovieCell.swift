@@ -33,7 +33,10 @@ class MovieCell: UITableViewCell {
     
     func set(movie: Movie) {
         // ToDo change it to image
-        movieImageView.image = UIImage(named: "1")
+        if let url = URL(string: movie.posterPath) {
+            movieImageView.load(url: url)
+        }
+        
         movieTitleLabel.text = movie.title
         movieSubtitleLabel.text = movie.overview
     }

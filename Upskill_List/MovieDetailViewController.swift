@@ -38,7 +38,9 @@ class MovieDetailViewController: UIViewController {
         movieImageView.contentMode = .scaleAspectFit
         movieImageView.clipsToBounds = true
         // ToDo load image correctly
-        movieImageView.image = UIImage(systemName: "1")
+        if let url = URL(string: movie.posterPath) {
+            movieImageView.load(url: url)
+        }
         stackView.addArrangedSubview(movieImageView)
         movieImageView.heightAnchor.constraint(equalToConstant: 300).isActive = true
     }
